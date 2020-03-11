@@ -38,7 +38,7 @@
 					out.print("An account with that username already exists");
 				}
 			}
-						
+					  	
 			//close the connection.
 			db.closeConnection(con);
 		} catch (Exception e) {
