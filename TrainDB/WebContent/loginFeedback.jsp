@@ -27,7 +27,9 @@
 
 			if (rs.next()) {
 				if (rs.getString("password").equals(password)) {
-					out.print("You successfully logged in!");
+					session.setAttribute("username", username);
+		            response.sendRedirect("home.jsp");
+		            return;
 				} else {
 					out.print("You entered the wrong password");
 				}

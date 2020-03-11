@@ -12,7 +12,6 @@
 	<%
 	    
 		try {
-	
 			//Get the database connection
 			ApplicationDB db = new ApplicationDB();	
 			Connection con = db.getConnection();		

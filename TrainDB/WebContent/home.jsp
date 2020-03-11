@@ -7,27 +7,19 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>Create Account</title>
+		<title>Home</title>
 	</head>
 <body>
 <br>
-
-
-	<form method="post" action="createAccountFeedback.jsp">
-	<b>Username </b>
-	<input type="text" name="username">
+	
+	<%
+	 String user = session.getAttribute("username").toString();
+     out.println("Hey there,  " + user);
+	 %>
+	
 	<br>
 	<br>
-	<b>Password </b>
-	<input type="text" name="password1">
-	<br>
-	<br>
-	<b>Confirm Password </b>
-	<input type="text" name="password2">
-	<br>
-	<br>
-	<input type="submit" value="Create">
-	</form>
+	<a href="logout.jsp">Logout</a>
 <br>
 
 </body>

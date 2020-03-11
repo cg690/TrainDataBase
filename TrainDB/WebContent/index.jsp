@@ -11,7 +11,7 @@
 	</head>
 <body>
 <br>
-	<form method="post" action="login.jsp">
+	<form method="post" action="loginFeedback.jsp">
 	<b>Username </b>
 	<input type="text" name="username">
 	<br>
