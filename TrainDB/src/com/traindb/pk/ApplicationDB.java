@@ -56,8 +56,7 @@ public class ApplicationDB {
 		
 		System.out.println(connection);		
 		dao.closeConnection(connection);
-	}
-	
+	}	
 	
 
 }

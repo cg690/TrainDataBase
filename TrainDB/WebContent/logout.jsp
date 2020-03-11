@@ -13,8 +13,15 @@
 <br>
 	
 	<%
-	 	session.removeAttribute("username");
-        session.removeAttribute("password");
+		session.removeAttribute("username");
+		session.removeAttribute("password");
+		session.removeAttribute("email");
+		session.removeAttribute("first");
+		session.removeAttribute("last");
+		session.removeAttribute("phone");
+		session.removeAttribute("city");
+		session.removeAttribute("state");
+		session.removeAttribute("zip");
         session.invalidate();
         response.sendRedirect("index.jsp");
 	 %>

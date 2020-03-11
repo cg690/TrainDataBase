@@ -28,6 +28,15 @@
 			if (rs.next()) {
 				if (rs.getString("password").equals(password)) {
 					session.setAttribute("username", username);
+					session.setAttribute("password", password);
+					session.setAttribute("email", rs.getString("email"));
+					session.setAttribute("first", rs.getString("first"));
+					session.setAttribute("last", rs.getString("last"));
+					session.setAttribute("phone", rs.getString("phone"));
+					session.setAttribute("city", rs.getString("city"));
+					session.setAttribute("state", rs.getString("state"));
+					session.setAttribute("zip", rs.getString("zip"));
+					
 		            response.sendRedirect("home.jsp");
 		            return;
 				} else {

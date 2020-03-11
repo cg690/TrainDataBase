@@ -13,8 +13,44 @@
 <br>
 	
 	<%
-	 String user = session.getAttribute("username").toString();
-     out.println("Hey there,  " + user);
+		String username = session.getAttribute("username") == null ? "" : session.getAttribute("username").toString();
+		String password = session.getAttribute("password") == null ? "" : session.getAttribute("password").toString();
+		String email = session.getAttribute("email") == null ? "" : session.getAttribute("email").toString();
+		String first = session.getAttribute("first") == null ? "" : session.getAttribute("first").toString();
+		String last = session.getAttribute("last") == null ? "" : session.getAttribute("last").toString();
+		String phone = session.getAttribute("phone") == null ? "" : session.getAttribute("phone").toString();
+		String city = session.getAttribute("city") == null ? "" : session.getAttribute("city").toString();
+		String state = session.getAttribute("state") == null ? "" : session.getAttribute("state").toString();
+		String zip = session.getAttribute("zip") == null ? "" : session.getAttribute("zip").toString();
+		
+	    out.println("Hey there,  " + "<b>" + username + "</b>!");
+	    out.println("<br><br>");
+	    
+	    out.println("Here is your data:");
+	    out.println("<table border=\"1\">");
+	    
+	    out.println("<tr>");
+	    out.println("<td>Email</td>");
+	    out.println("<td>First Name</td>");
+	    out.println("<td>Last Name</td>");
+	    out.println("<td>Phone</td>");
+	    out.println("<td>City</td>");
+	    out.println("<td>State</td>");
+	    out.println("<td>Zip</td>");
+	    out.println("</tr>");
+	    
+	    out.println("<tr>");
+	    out.println("<td>"+email+"</td>");
+	    out.println("<td>"+first+"</td>");
+	    out.println("<td>"+last+"</td>");
+	    out.println("<td>"+phone+"</td>");
+	    out.println("<td>"+city+"</td>");
+	    out.println("<td>"+state+"</td>");
+	    out.println("<td>"+zip+"</td>");
+	    out.println("</tr>");
+	    
+	    out.println("</table>");
+	
 	 %>
 	
 	<br>

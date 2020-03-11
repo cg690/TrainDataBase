@@ -19,13 +19,44 @@
 	<br>
 	<br>
 	<b>Password </b>
-	<input type="text" name="password1">
+	<input type="password" name="password1">
 	<br>
 	<br>
 	<b>Confirm Password </b>
-	<input type="text" name="password2">
+	<input type="password" name="password2">
 	<br>
 	<br>
+	<b>Email </b>
+	<input type="email" name="email">
+	<br>
+	<br>
+	<b>First Name </b>
+	<input type="text" name="first">
+	<br>
+	<br>
+	<b>Last Name </b>
+	<input type="text" name="last">
+	<br>
+	<br>
+	<b>Phone Number </b>
+	<input type="tel" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+	Format: 123-456-7890
+	<br>
+	<br>
+	<b>City </b>
+	<input type="text" name="city">
+	<br>
+	<br>
+	<b>State </b>
+	<input type="text" name="state">
+	<br>
+	<br>
+	<b>Zip </b>
+	<input type="text" name="zip" pattern="[0-9]{5}">
+	Format: 12345 (5 digits)
+	<br>
+	<br>
+	
 	<input type="submit" value="Create">
 	</form>
 <br>
