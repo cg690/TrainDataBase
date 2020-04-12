@@ -26,7 +26,7 @@
 	    out.println("Hey there,  " + "<b>" + username + "</b>!");
 	    out.println("<br><br>");
 	    
-	    out.println("Here is your data:");
+	    out.println("Your information:");
 	    out.println("<table border=\"1\">");
 	    
 	    out.println("<tr>");
@@ -52,6 +52,18 @@
 	    out.println("</table>");
 	
 	 %>
+	 <br>
+	 <br>
+	
+	<label>Search and View Functionality</label>
+
+	<form method="post" action="search.jsp">
+		<input type="submit" value="search train schedules">
+	</form>
+	
+	<form method="post" action="viewSchedule.jsp">
+		<input type="submit" value="view train schedules">
+	</form>
 	
 	<br>
 	<br>
