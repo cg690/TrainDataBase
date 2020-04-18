@@ -65,6 +65,14 @@
 		<input type="submit" value="view train schedules">
 	</form>
 	
+	<form method="get" action="retrieveSchedules.jsp">
+		<input type="submit" value="View Schedules">
+	</form>	
+	<br>
+	<br>
+	<form method = "get" action = "viewReservations.jsp">
+		<input type="submit" value="View Your Reservations">
+	</form>
 	<br>
 	<br>
 	<a href="logout.jsp">Logout</a>
