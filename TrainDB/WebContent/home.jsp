@@ -55,7 +55,7 @@
 	 <br>
 	 <br>
 	
-	<label>Search and View Functionality</label>
+	<label>Search and View Functionality (Part II)</label>
 
 	<form method="post" action="search.jsp">
 		<input type="submit" value="search train schedules">
@@ -65,11 +65,15 @@
 		<input type="submit" value="view train schedules">
 	</form>
 	
+	<br>
+	<br>
+	
+	<label>Reserve Functionality (Part III)</label>
+	
 	<form method="get" action="retrieveSchedules.jsp">
 		<input type="submit" value="View Schedules">
 	</form>	
-	<br>
-	<br>
+
 	<form method = "get" action = "viewReservations.jsp">
 		<input type="submit" value="View Your Reservations">
 	</form>
