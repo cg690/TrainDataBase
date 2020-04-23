@@ -79,6 +79,14 @@
 	</form>
 	<br>
 	<br>
+	
+	<label> Message Customer Service (Part IV)</label>
+	
+	<form method="get" action = "messageCustomerService.jsp">
+		<input type="submit" value="Message Customer Service">
+	</form>
+	<br>
+	<br>
 	<a href="logout.jsp">Logout</a>
 <br>
 
