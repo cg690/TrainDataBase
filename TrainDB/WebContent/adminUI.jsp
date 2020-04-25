@@ -81,6 +81,10 @@
 	<form method="post" action="bestCustomerFeedback.jsp">
 	<input type="submit" value="Get">
 	</form>
+		<br>
+		<form method="post" action="index.jsp">
+	<input type="submit" value="Home">
+	</form>
 	
 	
 	
