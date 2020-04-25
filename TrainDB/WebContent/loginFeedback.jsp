@@ -21,6 +21,23 @@
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
 			
+						
+			if(username.equalsIgnoreCase("admin")){
+				
+				if(password.equals("admin")){
+
+					response.sendRedirect("adminUI.jsp");
+					return;
+					
+					
+				}else{
+					out.print("Wrong password for Admin login");
+				}
+				
+			}
+			else{
+			
+			
 			PreparedStatement st = con.prepareStatement("SELECT * FROM customers WHERE username = ?");
 			st.setString(1, username);
 			ResultSet rs = st.executeQuery();
@@ -45,6 +62,7 @@
 			} else {
 				//no result set from username means the user doesn't exist
 				out.print("There is no account associated with that username");
+			}
 			}
 
 
