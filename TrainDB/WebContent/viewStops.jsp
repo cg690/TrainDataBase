@@ -111,7 +111,7 @@ ResultSet resultSet = null;
 				<br>
 				<br>
 				
-				<label>Round Trip, Single Trip, Monthly Pass, or Weekly Pass?</label>
+				<label>Round Trip, Single Trip?</label>
 				<br>
 				<input type = "checkbox"  name = "roundTrip" value = "Round"/>
 				<label for = "roundTrip"> Round </label>
@@ -119,6 +119,10 @@ ResultSet resultSet = null;
 				<br>
 				<input type = "checkbox" name = "singleTrip" value = "Single"/>
 				<label for = "singleTrip"> Single </label>
+				
+				<br>
+				
+				<label>Monthly Or Weekly Rate?</label>
 				
 				<br> 
 				<input type = "checkbox" name = "monthly" value = "Monthly"/>
