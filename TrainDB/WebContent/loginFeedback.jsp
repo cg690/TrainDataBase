@@ -37,7 +37,6 @@
 			}
 			else{
 			
-			
 			PreparedStatement st = con.prepareStatement("SELECT * FROM customers WHERE username = ?");
 			st.setString(1, username);
 			ResultSet rs = st.executeQuery();
@@ -60,7 +59,26 @@
 					out.print("You entered the wrong password");
 				}
 			} else {
-				//no result set from username means the user doesn't exist
+				//check if the user is an employee! 
+				st = con.prepareStatement("SELECT * FROM employee WHERE username = ?");
+				st.setString(1,username);
+				rs = st.executeQuery();
+				
+				if(rs.next()){
+					if(rs.getString("password").equals(password)){
+						session.setAttribute("ssn",rs.getString("ssn"));
+						session.setAttribute("username",username);
+						session.setAttribute("password",password);
+						session.setAttribute("first", rs.getString("first"));
+						session.setAttribute("last", rs.getString("last"));
+						
+						response.sendRedirect("employeePage.jsp");
+						return;
+					} else {
+						out.print("The password entered is incorrect :(");
+					}
+				}
+				
 				out.print("There is no account associated with that username");
 			}
 			}

@@ -55,6 +55,7 @@
 			//close the connection.
 			db.closeConnection(con);
 		} catch (Exception e) {
+			out.print("Yikes there was an error!");
 			out.print(e);
 		}
 	%>
