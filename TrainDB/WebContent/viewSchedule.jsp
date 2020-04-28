@@ -28,9 +28,11 @@
 		double weekly;
 		double single;
 		double round;
+		int scheduleid;
+		int train;
 		
 		public TrainData(String transit, String startStation, String stopStation, String startDate, String endDate, double monthly,
-				double weekly, double single) {
+				double weekly, double single, int scheduleid, int train) {
 			this.transit = transit;
 			this.startStation = startStation;
 			this.stopStation = stopStation;
@@ -40,6 +42,8 @@
 			this.weekly = weekly;
 			this.single = single;
 			this.round = 2*this.single;
+			this.scheduleid = scheduleid;
+			this.train = train;
 		}
 		
 		public String toString() {
@@ -63,6 +67,16 @@
 		//transit name 
 		myout.print("<td>");
 		myout.print("Transit Name");
+		myout.print("</td>");
+		
+		//schedule id 
+		myout.print("<td>");
+		myout.print("Schedule ID");
+		myout.print("</td>");
+		
+		//train number 
+		myout.print("<td>");
+		myout.print("Train Number");
 		myout.print("</td>");
 		
 		//start station
@@ -125,6 +139,16 @@
 			//transit name 
 			myout.print("<td>");
 			myout.print(td.transit);
+			myout.print("</td>");
+			
+			//schedule id 
+			myout.print("<td>");
+			myout.print(td.scheduleid);
+			myout.print("</td>");
+			
+			//train number 
+			myout.print("<td>");
+			myout.print(td.train);
 			myout.print("</td>");
 			
 			//start station
@@ -261,7 +285,9 @@
 		double monthly = Double.parseDouble(rs.getString("monthly"));
 		double weekly = Double.parseDouble(rs.getString("weekly"));
 		double single = Double.parseDouble(rs.getString("singleTrip"));
-		TrainData td = new TrainData(transit, start, end, s_date, e_date, monthly, weekly, single);
+		int scheduleid = Integer.parseInt(rs.getString("sc.scheduleid"));
+		int train = Integer.parseInt(rs.getString("sc.tid"));
+		TrainData td = new TrainData(transit, start, end, s_date, e_date, monthly, weekly, single, scheduleid, train);
 		schedule_info.add(td);
 	}
 
