@@ -182,14 +182,33 @@
 	<%
 	try {
 	String sort_order = request.getParameter("sort");
+	String search_origin = request.getParameter("origin");
+	String search_destination = request.getParameter("destination");
+	if (search_origin != null && search_origin.equals("Any")) {
+		search_origin = "";
+	}
+	if (search_destination != null && search_destination.equals("Any")) {
+		search_destination = "";
+	}
+
 	List<String> orderList = Arrays.asList("Transit Name", "Departure Station", "Arrival Station", "Departure Time", "Arrival Time", "Monthly", "Weekly", "Single Trip", "Round Trip");
 	ArrayList<TrainData> schedule_info = new ArrayList<TrainData>();
+	
+	ArrayList<String> stations = new ArrayList<String>();
+	stations.add("Any");
 	
 	//Get the database connection
 	ApplicationDB db = new ApplicationDB();	
 	Connection con = db.getConnection();	
 	
-	//System.out.println(i);
+	//fill in all stations
+	PreparedStatement ps = con.prepareStatement("select distinct name from station order by name");
+	ResultSet res = ps.executeQuery();
+	while (res.next()) {
+		stations.add(res.getString("name"));
+	}
+	
+	
 	String sql_cmd = "select s.transitName, st.name 'startStation', st2.name 'stopStation', s.departureTime, s.arrivalTime, " +
 			"s.monthly, s.weekly, s.singleTrip, sc.tid, sc.scheduleid " +
 			"from stops s join station st on s.startSid = st.sid join station st2 on s.stopSid = st2.sid " +
@@ -218,7 +237,16 @@
 		ord = "order by s.singleTrip, sc.scheduleid";
 	}
 	
-	sql_cmd += ord;
+	String sql_station = "";
+	if ((search_origin == null || search_origin.equals("")) && (search_destination == null || search_destination.equals(""))) {
+		//do nothing
+	} else if ((search_origin == null || search_origin.equals(""))) {
+		sql_station = "where st2.name=\"" + search_destination + "\" ";
+	} else {
+		sql_station = "where st.name=\"" + search_origin + "\" ";
+	}
+	
+	sql_cmd = sql_cmd + sql_station + ord;
 	
 	PreparedStatement st = con.prepareStatement(sql_cmd);
 	//st.setString(1, transit);
@@ -240,8 +268,10 @@
 	drawTable(schedule_info, out);
 	%>
 	
-	Sort By: 
+	<br>
+	
 	<form name="sort" method="post">
+	Sort By: 
 	<select id=sort name="sort">
 		<%
 		for (String order : orderList) {
@@ -265,6 +295,63 @@
 		%>
 	</select>
 	<input type="submit" name="submit" value="Sort Schedule"/>
+	</form>
+	
+	<br>
+	
+	<form name="origin" method="post">
+	Filter By Departure Station:  
+	<select id=origin name="origin">
+		<%
+		for (String origin : stations) {
+		if (origin.equals(search_origin)) {
+		%>
+		<option value="<%=origin%>" selected="selected">
+				<%=origin%>
+		</option>
+		<%
+		} else {
+		%>
+		<option value="<%=origin%>">
+				<%=origin%>
+		</option>
+		<%
+		}
+		%>
+			
+		<%
+		}
+		%>
+	</select>
+	<input type="submit" name="submit" value="Filter"/>
+	</form>
+
+	<br>
+	<form name="destination" method="post">
+	Filter By Arrival Station:  
+	<select id=destination name="destination">
+		<%
+		for (String dest : stations) {
+		if (dest.equals(search_destination)) {
+		%>
+		<option value="<%=dest%>" selected="selected">
+				<%=dest%>
+		</option>
+		<%
+		} else {
+		%>
+		<option value="<%=dest%>">
+				<%=dest%>
+		</option>
+		<%
+		}
+		%>
+			
+		<%
+		}
+		%>
+	</select>
+	<input type="submit" name="submit" value="Filter"/>
 	</form>
 	
 	<br>

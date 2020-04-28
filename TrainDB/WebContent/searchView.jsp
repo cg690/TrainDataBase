@@ -226,7 +226,6 @@
 	int i = 0;
 	while (true) {
 		i++;
-		//System.out.println(i);
 		st = con.prepareStatement(
 				"select s.transitName, st.name 'startStation', st2.name 'stopStation', s.departureTime, s.arrivalTime, " +
 				"s.monthly, s.weekly, s.singleTrip, sc.tid, sc.scheduleid " +
