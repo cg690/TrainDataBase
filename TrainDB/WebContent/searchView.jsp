@@ -267,7 +267,7 @@
 				"s.monthly, s.weekly, s.singleTrip, sc.tid, sc.scheduleid " +
 				"from stops s join station st on s.startSid = st.sid join station st2 on s.stopSid = st2.sid " +
 				"join schedule sc on s.transitName = sc.transitName and s.scheduleid = sc.scheduleid " +
-				"where s.transitName = ? and s.scheduleid=? and s.departureTime between ? and ? order by s.departureTime");
+				"where s.transitName = ? and s.scheduleid=? and DATE(s.departureTime) between ? and ? order by s.departureTime");
 		st.setString(1, transit);
 		st.setString(2, Integer.toString(i));
 		st.setString(3, startDate);
