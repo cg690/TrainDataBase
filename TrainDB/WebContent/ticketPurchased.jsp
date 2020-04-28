@@ -136,8 +136,8 @@
 					{
 						
 						//query = "SELECT roundTrip FROM TrainRDBMS.stops WHERE scheduleid = " + scheduleid + " AND transitName = '" + transitName + "' AND startSid = " + desiredOrigin + " AND stopSid = " + desiredDestination + ";";
-						query =  "SELECT roundTrip FROM TrainRDBMS.stops WHERE scheduleid = " + scheduleid + " AND transitName = '" + transitName + "' AND startSid =  " + desiredOrigin + ";";
-						query1 = "SELECT roundTrip FROM TrainRDBMS.stops WHERE scheduleid = " + scheduleid + " AND transitName = '" + transitName + "' AND stopSid =  " + desiredDestination + ";";
+						query =  "SELECT singleTrip FROM TrainRDBMS.stops WHERE scheduleid = " + scheduleid + " AND transitName = '" + transitName + "' AND startSid =  " + desiredOrigin + ";";
+						query1 = "SELECT singleTrip FROM TrainRDBMS.stops WHERE scheduleid = " + scheduleid + " AND transitName = '" + transitName + "' AND stopSid =  " + desiredDestination + ";";
 					}
 					else
 					{
@@ -145,12 +145,25 @@
 						throw new Exception();
 					}
 					
-					rs = statement.executeQuery(query);
-					rs.next();
-					travelFee = rs.getDouble(1);
-					rs = statement.executeQuery(query1);
-					rs.next();
-					travelFee += rs.getDouble(1);
+					if(request.getParameterValues("roundTrip")!=null)
+					{
+						rs = statement.executeQuery(query);
+						rs.next();
+						travelFee = rs.getDouble(1)*2;
+						rs = statement.executeQuery(query1);
+						rs.next();
+						travelFee += rs.getDouble(1)*2;
+					}
+					else
+					{
+						rs = statement.executeQuery(query);
+						rs.next();
+						travelFee = rs.getDouble(1);
+						rs = statement.executeQuery(query1);
+						rs.next();
+						travelFee += rs.getDouble(1);
+					}
+					
 					
 					if(request.getParameterValues("weekly")!=null)
 					{
@@ -183,7 +196,7 @@
 					rs = statement.executeQuery(query1);
 					rs.next();
 					travelFee += rs.getDouble(1);
-					travelFee /= 4;
+					travelFee /= 2;
 					travelFee += bookingFee;
 					
 					
