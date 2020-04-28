@@ -73,10 +73,10 @@ ResultSet resultSet = null;
 							<td><%=resultSet.getString("stopName") %></td>
 							<td><%=resultSet.getString("arrivalTime") %></td>
 							<td><%=resultSet.getString("departureTime") %></td>
-							<td><%=resultSet.getString("monthly") %></td>
-							<td><%=resultSet.getString("weekly") %></td>
-							<td><%=resultSet.getString("singleTrip") %></td>
-							<td><%=resultSet.getString("roundTrip") %></td>
+							<td><%=resultSet.getDouble("monthly") %></td>
+							<td><%=resultSet.getDouble("weekly") %></td>
+							<td><%=resultSet.getDouble("singleTrip") %></td>
+							<td><%=resultSet.getDouble("singleTrip") * 2 %></td>
 							</tr>
 						<% 
 					}
