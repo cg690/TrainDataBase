@@ -13,7 +13,7 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/shlomi/Downloads/apache-tomcat-7.0.100/lib/servlet-api.jar"/>
-	<classpathentry kind="lib" path="/Users/shlomi/Downloads/apache-tomcat-7.0.100/lib/jsp-api.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Program Files/Java/apache-tomcat-7.0.100/lib/servlet-api.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Program Files/Java/apache-tomcat-7.0.100/lib/jsp-api.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

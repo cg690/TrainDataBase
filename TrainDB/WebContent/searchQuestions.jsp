@@ -16,6 +16,7 @@
 
 
 <p>Search Questions:</p>
+<p> Please include the question mark when searching for questions</p>
 <form method="post" action="searchQuestions.jsp">
 	<input type="text" name="search">
 	<input type="submit" value="submit">

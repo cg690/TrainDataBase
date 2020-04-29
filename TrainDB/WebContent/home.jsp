@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" import="com.traindb.pk.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
-<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
+<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -11,9 +11,49 @@
 	</head>
 <body>
 <br>
+<% 
+String username = session.getAttribute("username") == null ? "" : session.getAttribute("username").toString();
+out.println("Hey there,  " + "<b>" + username + "</b>!");
+
+
+%>
+	
+	<div>
+	<h2>Notifications</h2>
+	<!-- Notifications can now go into here once we query the database -->
+	<%
+	try{
+	ApplicationDB app = new ApplicationDB();
+	Connection con = app.getConnection();
+	StringBuilder name_sb = new StringBuilder();
+	name_sb.append('\'');
+	String user = session.getAttribute("username").toString();
+	name_sb.append(user);
+	name_sb.append('\'');
+	String finalName = name_sb.toString();
+	String query = "SELECT * FROM reservation r, stops s WHERE r.username=" + finalName + " AND s.transitName=r.transitName AND s.scheduleid=r.scheduleid AND s.startSid <= r.originSid AND s.stopSid > r.originSid AND s.delay >=0 UNION SELECT * FROM reservation r, stops s WHERE r.username=" + finalName +" AND s.transitName=r.transitName AND s.scheduleid=r.scheduleid AND s.startSid >= r.originSid AND s.stopSid < r.originSid AND s.delay>=0;";
+	
+	Statement state = con.createStatement();
+	ResultSet rs=state.executeQuery(query);
+
+	while(rs.next())
+	{
+		
+		%>
+		<p>Your train: <%= rs.getString("transitName") %> with a schedule id of <%= rs.getString("scheduleid") %> is now delayed by <%= rs.getString("delay") %> minutes.</p>
+		
+		<%
+	
+	}
+	}catch (Exception e){
+		out.println(e);
+	}
+	%>
+	
+	</div>
+	
 	
 	<%
-		String username = session.getAttribute("username") == null ? "" : session.getAttribute("username").toString();
 		String password = session.getAttribute("password") == null ? "" : session.getAttribute("password").toString();
 		String email = session.getAttribute("email") == null ? "" : session.getAttribute("email").toString();
 		String first = session.getAttribute("first") == null ? "" : session.getAttribute("first").toString();
@@ -23,7 +63,6 @@
 		String state = session.getAttribute("state") == null ? "" : session.getAttribute("state").toString();
 		String zip = session.getAttribute("zip") == null ? "" : session.getAttribute("zip").toString();
 		
-	    out.println("Hey there,  " + "<b>" + username + "</b>!");
 	    out.println("<br><br>");
 	    
 	    out.println("Your information:");
