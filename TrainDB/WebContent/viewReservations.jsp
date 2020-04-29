@@ -21,17 +21,17 @@ ResultSet resultSet = null;
 			<br/>
 			<table border = "1">
 				<tr>
-					<td>rid</td>
-					<td>transitName</td>
-					<td>scheduleid</td>
-					<td>tid</td>
-					<td>originSid</td>
-					<td>destinationSid</td>
-					<td>bookingFee</td>
-					<td>totalFare</td>
-					<td>bookingDate</td>
-					<td>seatNumber</td>
-					<td>seatClass</td>
+					<td>Rid</td>
+					<td>Transit Name</td>
+					<td>Schedule #</td>
+					<td>Train #</td>
+					<td>Origin Station</td>
+					<td>Destination Station</td>
+					<td>Booking Fee</td>
+					<td>Total Fare</td>
+					<td>Booking Date</td>
+					<td>Seat Number</td>
+					<td>Seat Class</td>
 				</tr>
 				<%
 					try{
@@ -78,17 +78,17 @@ ResultSet resultSet = null;
 			<br/>
 			<table border = "1">
 				<tr>
-					<td>rid</td>
-					<td>transitName</td>
-					<td>scheduleid</td>
-					<td>tid</td>
-					<td>originSid</td>
-					<td>destinationSid</td>
-					<td>bookingFee</td>
-					<td>totalFare</td>
-					<td>bookingDate</td>
-					<td>seatNumber</td>
-					<td>seatClass</td>
+					<td>Rid</td>
+					<td>Transit Name</td>
+					<td>Schedule #</td>
+					<td>Train #</td>
+					<td>Origin Station</td>
+					<td>Destination Station</td>
+					<td>Booking Fee</td>
+					<td>Total Fare</td>
+					<td>Booking Date</td>
+					<td>Seat Number</td>
+					<td>Seat Class</td>
 				</tr>
 				<%
 					try
