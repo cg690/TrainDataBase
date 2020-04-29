@@ -119,10 +119,10 @@ out.println("Hey there,  " + "<b>" + username + "</b>!");
 	<br>
 	<br>
 	
-	<label> Message Customer Service (Part IV)</label>
+	<label>Customer Service (Part IV)</label>
 	
 	<form method="get" action = "messageCustomerService.jsp">
-		<input type="submit" value="Message Customer Service">
+		<input type="submit" value="Customer Service">
 	</form>
 	<br>
 	<br>
