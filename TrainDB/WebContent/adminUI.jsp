@@ -46,7 +46,7 @@
 	<br>
 	
 	year:(xxxx)
-		<input type="text" name="month" pattern="[0-9]{4}">
+		<input type="text" name="year" pattern="[0-9]{4}">
 	<br>
 	<input type="submit" value="Sales Report" >
 	</form>
