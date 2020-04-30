@@ -22,7 +22,7 @@
 			out.print("Best customer:<br>");
 			
 			while(rs.next()){
-				out.print(rs.getString("username")+": "+rs.getString("max"));
+				out.print(rs.getString("username")+": $"+rs.getString("max"));
 
 				out.print("<br>");
 			}
@@ -30,7 +30,7 @@
 			PreparedStatement st2 = con.prepareStatement("SELECT transitName,count(*) as count FROM reservation GROUP BY transitName ORDER BY count DESC LIMIT 5");
 			ResultSet rs2 = st2.executeQuery();
 			while(rs2.next()){
-			out.print(rs2.getString("transitName")+": "+rs.getString("count")+" Reservations");
+			out.print(rs2.getString("transitName")+": "+rs2.getString("count")+" Reservations");
 
 			out.print("<br>");
 			}
