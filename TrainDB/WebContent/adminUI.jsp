@@ -36,6 +36,22 @@
 	
 	<input type="submit" name= "deleteButton" value="Delete" >
 	</form>	
+	
+<br>
+	<form method="post" action="salesReport.jsp">
+	<b>Enter month & year of to get sales </b>
+	<br>
+	Month:(xx)
+	<input type="text" name="month" pattern="[0-9]{2}">
+	<br>
+	
+	year:(xxxx)
+		<input type="text" name="month" pattern="[0-9]{4}">
+	<br>
+	<input type="submit" value="Sales Report" >
+	</form>
+	
+	
 	<br>
 	<form method="post" action="reservationListFeedback.jsp">
 	<b>Get list of reservations By Transit line & train ID:</b>
