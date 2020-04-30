@@ -43,9 +43,9 @@
 					ResultSet rs2 = st2.executeQuery();
 					if(rs2.next()){
 						PreparedStatement st3 = con.prepareStatement("SELECT r.rid FROM reservation r, schedule s WHERE r.transitName = s.transitName AND s.tid = ? AND s.transitName = ?");
-		
-						st3.setString(1, tname);
-						st3.setString(2,tid);
+						st3.setString(1,tid);
+						st3.setString(2, tname);
+						
 						ResultSet rs3 = st3.executeQuery();
 					while(rs3.next()){
 %>
