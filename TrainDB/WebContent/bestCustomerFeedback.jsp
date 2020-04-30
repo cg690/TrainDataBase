@@ -22,7 +22,7 @@
 			out.print("Best customer:<br>");
 			
 			while(rs.next()){
-				out.print(rs.getString("username")+": "+rs.getString("max"));
+				out.print(rs.getString("username")+": $"+rs.getString("max"));
 
 				out.print("<br>");
 			}
