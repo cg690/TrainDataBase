@@ -20,6 +20,7 @@ out.println("Hey there,  " + "<b>" + username + "</b>!");
 	
 	<div>
 	<h2>Notifications</h2>
+	<h4>Reservation Delays:	</h4>
 	<!-- Notifications can now go into here once we query the database -->
 	<%
 	try{
@@ -31,7 +32,7 @@ out.println("Hey there,  " + "<b>" + username + "</b>!");
 	name_sb.append(user);
 	name_sb.append('\'');
 	String finalName = name_sb.toString();
-	String query = "SELECT * FROM reservation r, stops s WHERE r.username=" + finalName + " AND s.transitName=r.transitName AND s.scheduleid=r.scheduleid AND s.startSid <= r.originSid AND s.stopSid > r.originSid AND s.delay >=0 UNION SELECT * FROM reservation r, stops s WHERE r.username=" + finalName +" AND s.transitName=r.transitName AND s.scheduleid=r.scheduleid AND s.startSid >= r.originSid AND s.stopSid < r.originSid AND s.delay>=0;";
+	String query = "SELECT * FROM reservation r, stops s WHERE r.username=" + finalName + " AND s.transitName=r.transitName AND s.scheduleid=r.scheduleid AND s.startSid <= r.originSid AND s.stopSid > r.originSid AND s.delay >0 UNION SELECT * FROM reservation r, stops s WHERE r.username=" + finalName +" AND s.transitName=r.transitName AND s.scheduleid=r.scheduleid AND s.startSid >= r.originSid AND s.stopSid < r.originSid AND s.delay>0;";
 	
 	Statement state = con.createStatement();
 	ResultSet rs=state.executeQuery(query);
