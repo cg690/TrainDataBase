@@ -35,15 +35,7 @@
 	<input type="submit" name= "addButton" value="Add">
 	
 	<input type="submit" name= "deleteButton" value="Delete" >
-	</form>
-<br>
-	<form method="post" action="editInfo.jsp">
-	<b>Username of Customer to edit: </b>
-	<input type="text" name="username">
-	<br>
-	<input type="submit" value="Edit">
-	</form>
-	
+	</form>	
 	<br>
 	<form method="post" action="reservationListFeedback.jsp">
 	<b>Get list of reservations By Transit line & train ID:</b>
