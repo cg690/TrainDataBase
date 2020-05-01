@@ -34,9 +34,13 @@
 			st.setString(2, year);
 			ResultSet rs = st.executeQuery();
 
-			if (rs.next()) {
-				
-				System.out.print(rs.getString("sum"));
+			if (rs.next()) {				
+				if(rs.getString("sum")==null){
+					out.print("NO SALES THAT MONTH");
+				}
+				else{
+				out.print("$" + rs.getString("sum"));
+				}
 			} else {
 				//no result set from username means the user doesn't exist
 				out.print("NO SALES");
