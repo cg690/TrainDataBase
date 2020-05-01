@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" import="com.traindb.pk.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 
@@ -93,6 +93,44 @@
 		<form method="post" action="index.jsp">
 	<input type="submit" value="Home">
 	</form>
+	
+<br>	
+	<b>Name of Transit Lines:</b>
+	<br>
+	<%
+	try {
+		ApplicationDB db = new ApplicationDB();	
+		Connection con = db.getConnection();	
+		
+		PreparedStatement st = con.prepareStatement("SELECT DISTINCT transitName FROM schedule");
+		ResultSet rs = st.executeQuery();
+		while(rs.next()){
+			out.print(rs.getString("transitName"));
+			out.print("<br>");
+		}
+		out.print("<br>");
+		out.print("<b>List of Cities:</b>");
+		out.print("<br>");
+		
+		PreparedStatement st2 = con.prepareStatement("SELECT DISTINCT city FROM station");
+		ResultSet rs2 = st2.executeQuery();
+		while(rs2.next()){
+			out.print(rs2.getString("city"));
+			out.print("<br>");
+		}
+
+		
+		
+		
+		
+		db.closeConnection(con);
+	} catch (Exception e) {
+		out.print(e);
+	}
+	
+	%>
+	
+	
 	
 	
 	
