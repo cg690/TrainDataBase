@@ -120,7 +120,6 @@ ResultSet resultSet = null;
 	<br>
 	
 
-	//Display Stops Table, which has a detailed schedule stop to stop. You can pick which tuple to add delay to and it will propogate	
 	 <h2>Detailed Schedule, Station by Station</h2>
 	 <table border = "1">
 				<tr>
@@ -209,6 +208,23 @@ ResultSet resultSet = null;
 	</form>
 	<br>
 	<br>
+	
+	
+	
+	<label> List of Train Schedules for Specific Origin and Destination (Part VI)</label>
+	
+	<form method="get" action = "listOriginDest.jsp">
+		<label>Starting Station ID:</label>
+	<input type="number" name="startSid">
+	<label>Destination Station ID: </label>
+	<input type="number" name="stopSid" >
+	<p>Please enter the Station ID's of the origin and destination station. They're visible in the table above!</p>
+		<input type="submit" value="List Schedules for this Path!">
+	</form>
+	<br>
+	<br>
+	
+	
 	<a href="logout.jsp">Logout</a>
 <br>
 
