@@ -22,8 +22,11 @@
 	<input type="text" name="search">
 	<input type="submit" value="submit">
 </form>
+<p id="demo"></p>
 <%
 String myText = request.getParameter("search");
+
+
 if(myText != null){
 	
 	//search is the question
