@@ -45,7 +45,7 @@
 				session.setAttribute("seatNumber", rs.getString("seatNumber"));
 				session.setAttribute("class", rs.getString("class"));
 				
-				out.print("Edit for reservation:" + rid);
+				out.print("Edit for reservation: " + rid);
 					
 					
 
