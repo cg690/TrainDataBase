@@ -36,6 +36,7 @@ ResultSet resultSet = null;
 					ApplicationDB schedules = new ApplicationDB();
 					con = schedules.getConnection();
 					statement = con.createStatement();
+					session.setAttribute("username", "Arsiluk");
 					
 					//String query = "SELECT * FROM TrainRDBMS.schedule";
 					String query = "SELECT DISTINCT schedule.transitName, schedule.scheduleid, tid, origins.name AS originName, destinations.name AS destinationName, travelTime, availableSeats, departureTime, arrivalTime FROM TrainRDBMS.schedule, (SELECT name, sid, scheduleid, transitName FROM TrainRDBMS.station, TrainRDBMS.schedule WHERE sid = originSid) origins, (SELECT name, sid, scheduleid FROM TrainRDBMS.station, TrainRDBMS.schedule WHERE sid = destinationSid) destinations WHERE schedule.scheduleid = origins.scheduleid AND origins.scheduleid = destinations.scheduleid AND schedule.originSid = origins.sid AND schedule.destinationSid = destinations.sid;";					

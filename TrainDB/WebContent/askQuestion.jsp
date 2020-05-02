@@ -15,8 +15,8 @@
 <ul>
 	
 	<p>Question: </p>
-	<form method="post" action="askQuestionFeedback.jsp">
-	<input type="text" name="question">
+	<form name="myForm" method="post" action="askQuestionFeedback.jsp" onsubmit="return validateForm()">
+	<input type="text" name="question" id="text_bpx">
 	<input type="submit" value="submit">
 	
 	</form>
@@ -30,5 +30,15 @@
 
 	<br>
 	<br>
+	
+	<script>
+	function validateForm() {
+		  var x = document.forms["myForm"]["question"].value;
+		  if (x == "") {
+		    alert("Name must be filled out");
+		    return false;
+		  }
+		}
+	</script>
 </body>
 </html>
