@@ -19,6 +19,9 @@
 
 	<%!
 	public class TrainData {
+		String transitName;
+		int scheduleid;
+		int train;
 		String startStation;
 		String stopStation;
 		String startDate;
@@ -29,8 +32,11 @@
 		double round;
 		ArrayList<String> stops;
 		
-		public TrainData(String startStation, String stopStation, String startDate, String endDate, double monthly,
+		public TrainData(String transitName, int scheduleid, int train, String startStation, String stopStation, String startDate, String endDate, double monthly,
 				double weekly, double single, ArrayList<String> stops) {
+			this.transitName = transitName;
+			this.scheduleid = scheduleid;
+			this.train = train;
 			this.startStation = startStation;
 			this.stopStation = stopStation;
 			this.startDate = startDate;
@@ -59,6 +65,21 @@
 
 		//make the column row
 		myout.print("<tr>");
+
+		//transit name
+		myout.print("<td>");
+		myout.print("Transit Name");
+		myout.print("</td>");
+		
+		//schedule id
+		myout.print("<td>");
+		myout.print("Schedule ID");
+		myout.print("</td>");
+		
+		//train
+		myout.print("<td>");
+		myout.print("Train Number");
+		myout.print("</td>");
 		
 		//start station
 		myout.print("<td>");
@@ -121,6 +142,21 @@
 		for (TrainData td : schedule) {
 			//make the data row
 			myout.print("<tr>");
+			
+			//transit name
+			myout.print("<td>");
+			myout.print(td.transitName);
+			myout.print("</td>");
+			
+			//schedule id
+			myout.print("<td>");
+			myout.print(td.scheduleid);
+			myout.print("</td>");
+			
+			//train
+			myout.print("<td>");
+			myout.print(td.train);
+			myout.print("</td>");
 			
 			//start station
 			myout.print("<td>");
@@ -226,13 +262,12 @@
 	int i = 0;
 	while (true) {
 		i++;
-		//System.out.println(i);
 		st = con.prepareStatement(
-				"select s.transitName, st.name 'startStation', st2.name 'stopStation', s.departureTime, s.arrivalTime, " +
+				"select s.transitName, sc.scheduleid, sc.tid, st.name 'startStation', st2.name 'stopStation', s.departureTime, s.arrivalTime, " +
 				"s.monthly, s.weekly, s.singleTrip, sc.tid, sc.scheduleid " +
 				"from stops s join station st on s.startSid = st.sid join station st2 on s.stopSid = st2.sid " +
 				"join schedule sc on s.transitName = sc.transitName and s.scheduleid = sc.scheduleid " +
-				"where s.transitName = ? and s.scheduleid=? and s.departureTime between ? and ? order by s.departureTime");
+				"where s.transitName = ? and s.scheduleid=? and DATE(s.departureTime) between ? and ? order by s.departureTime");
 		st.setString(1, transit);
 		st.setString(2, Integer.toString(i));
 		st.setString(3, startDate);
@@ -248,6 +283,9 @@
 		ArrayList<String> stops_on_way = new ArrayList<String>();
 		boolean s_updated = false;
 		boolean e_updated = false;
+		int scheduleid = 0;
+		int train = 0;
+		String transitName = "";
 		
 		if (!rs.next())
 			break;
@@ -259,6 +297,9 @@
 			
 			j++;
 			if (start.equals(rs.getString("startStation"))) {
+				scheduleid = Integer.parseInt(rs.getString("scheduleid"));
+				transitName = rs.getString("transitName");
+				train = Integer.parseInt(rs.getString("tid"));
 				s = j;
 				s_date = rs.getString("departureTime");
 				s_updated = true;
@@ -287,7 +328,7 @@
 		}
 		
 		if (e >= s && e_updated && s_updated) {
-			TrainData td = new TrainData(start, end, s_date, e_date, monthly, weekly, single, stops_on_way);
+			TrainData td = new TrainData(transitName, scheduleid, train, start, end, s_date, e_date, monthly, weekly, single, stops_on_way);
 			schedule_info.add(td);
 		}
 		

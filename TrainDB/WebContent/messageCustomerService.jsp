@@ -31,7 +31,8 @@
 <br>
 <br>
 
-
+<h2>Question and Answer List: </h3>
+<h4>If your question does not have a response, a customer representative will answer it shortly!</h4>
 
 
 
@@ -46,7 +47,7 @@ try{
 	sb.append(username);
 	sb.append('\'');
 	String finalUserName = sb.toString();
-	String query = "SELECT * FROM questions WHERE questions.username=" + finalUserName;
+	String query = "SELECT * FROM questions";
 	
 	Statement state = con.createStatement();
 	ResultSet rs=state.executeQuery(query);
@@ -57,7 +58,9 @@ try{
 	%>
 	<table>
 	<tr><th style="text-align:left;">Question</th></tr>
+	<tr><th style="text-align:left;">Asked by : <%= rs.getString(1) %></th></tr>
 	<tr><td style="text-align:left;"><%= rs.getString(2) %></td></tr>
+	<br>
 
 	<%
 	String answer_query = "SELECT * FROM answers WHERE question_id=" + question_id;
@@ -70,6 +73,7 @@ try{
 			
 			<tr><td style="text-align:left;"><%=rs_answer.getString(2) %></td></tr>
 			</table>
+			<br>
 			<%
 		}
 	}catch (Exception e){

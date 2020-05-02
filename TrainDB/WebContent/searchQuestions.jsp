@@ -10,12 +10,14 @@
 </head>
 <body>
 <h1>Search Questions and Answers</h1>
-
+<form method="get" action = "messageCustomerService.jsp">
+		<input type="submit" value="Return to Customer Service">
+</form>
 <br>
 <br>
-
-
-<p>Search Questions:</p>
+<h3>Please use this search bar to search questions</h3>
+<p> If the question includes a question mark at the end, please include it.</p>
+<p> example: If you previously asked "How many seats are on the train?", please type How many seats are on the train? in  the search bar</p>
 <form method="post" action="searchQuestions.jsp">
 	<input type="text" name="search">
 	<input type="submit" value="submit">
@@ -77,8 +79,6 @@ if(myText != null){
 
 <br>
 <br>
-<form method="get" action = "messageCustomerService.jsp">
-		<input type="submit" value="Return to Customer Service">
-</form>
+
 </body>
 </html>

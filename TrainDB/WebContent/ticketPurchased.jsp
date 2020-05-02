@@ -27,6 +27,9 @@
 	double classCost = 0;
 	int originNum = 0;
 	int destinationNum = 0;
+	String originName = new String();
+	String destinationName = new String();
+	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -50,6 +53,8 @@
 					//out.print("We are getting the station names now... <br>");
 					String desiredOrigin = request.getParameter("desiredOrigin");
 					String desiredDestination = request.getParameter("desiredDestination");
+					originName = desiredOrigin;
+					destinationName = desiredDestination;
 					//out.print("Desired origin = " + desiredOrigin + "<br>");
 					//out.print("Desired origin = " + desiredDestination + "<br>");
 
@@ -117,9 +122,9 @@
 					
 					if(request.getParameterValues("singleTrip")!=null)
 					{
-						if(request.getParameterValues("roundTrip")!=null || request.getParameterValues("weekly")!=null || request.getParameterValues("monthly")!=null)
+						if(request.getParameterValues("roundTrip")!=null)
 						{
-							out.print("Please choose only Weekly, Monthly, Single, or Round trip, not more than one");
+							out.print("Please choose only Single, or Round trip, not more than one");
 							con.close();
 							throw new Exception();
 						}
@@ -129,17 +134,38 @@
 					}
 					else if(request.getParameterValues("roundTrip")!=null)
 					{
-						if(request.getParameterValues("weekly")!=null || request.getParameterValues("monthly")!=null)
-						{
-							out.print("Please choose only Weekly, Monthly, Single, or Round trip, not more than one");
-							con.close();
-							throw new Exception();
-						}
+						
 						//query = "SELECT roundTrip FROM TrainRDBMS.stops WHERE scheduleid = " + scheduleid + " AND transitName = '" + transitName + "' AND startSid = " + desiredOrigin + " AND stopSid = " + desiredDestination + ";";
-						query =  "SELECT roundTrip FROM TrainRDBMS.stops WHERE scheduleid = " + scheduleid + " AND transitName = '" + transitName + "' AND startSid =  " + desiredOrigin + ";";
-						query1 = "SELECT roundTrip FROM TrainRDBMS.stops WHERE scheduleid = " + scheduleid + " AND transitName = '" + transitName + "' AND stopSid =  " + desiredDestination + ";";
+						query =  "SELECT singleTrip FROM TrainRDBMS.stops WHERE scheduleid = " + scheduleid + " AND transitName = '" + transitName + "' AND startSid =  " + desiredOrigin + ";";
+						query1 = "SELECT singleTrip FROM TrainRDBMS.stops WHERE scheduleid = " + scheduleid + " AND transitName = '" + transitName + "' AND stopSid =  " + desiredDestination + ";";
 					}
-					else if(request.getParameterValues("weekly")!=null)
+					else
+					{
+						out.print("Error please elect Single or round trip <br>");
+						throw new Exception();
+					}
+					
+					if(request.getParameterValues("roundTrip")!=null)
+					{
+						rs = statement.executeQuery(query);
+						rs.next();
+						travelFee = rs.getDouble(1)*2;
+						rs = statement.executeQuery(query1);
+						rs.next();
+						travelFee += rs.getDouble(1)*2;
+					}
+					else
+					{
+						rs = statement.executeQuery(query);
+						rs.next();
+						travelFee = rs.getDouble(1);
+						rs = statement.executeQuery(query1);
+						rs.next();
+						travelFee += rs.getDouble(1);
+					}
+					
+					
+					if(request.getParameterValues("weekly")!=null)
 					{
 						if(request.getParameterValues("monthly")!=null)
 						{
@@ -159,14 +185,14 @@
 					}
 					else
 					{
-						out.print("Please choose one of Weekly, Monthly, Single, or Round trip");
+						out.print("Please choose one of Weekly, or Monthly rates <br>");
 						con.close();
 						throw new Exception();
 					}
 					
 					rs = statement.executeQuery(query);
 					rs.next();
-					travelFee = rs.getDouble(1);
+					travelFee += rs.getDouble(1);
 					rs = statement.executeQuery(query1);
 					rs.next();
 					travelFee += rs.getDouble(1);
@@ -180,6 +206,7 @@
 						if(request.getParameterValues("business")!=null || request.getParameter("first")!=null)
 						{
 							out.print("Please only select 1 seating class <br/>");
+							con.close();
 							throw new Exception();
 						}
 						out.print("You chose economy class seating <br/>");
@@ -191,6 +218,7 @@
 						if(request.getParameterValues("first")!=null)
 						{
 							out.print("Please only select 1 seating class <br/>");
+							con.close();
 							throw new Exception();
 						}
 						out.print("You chose business class seating <br/>");
@@ -215,8 +243,10 @@
 					if(request.getParameterValues("Yes")!=null)
 					{
 						out.print("You are someone eligable for a discount </br>");
-						travelFee *= 0.4;
+						travelFee -= (travelFee * 0.4);
 					}
+					
+					travelFee = Math.round(travelFee*100)/100;
 
 					//query = "SELECT * FROM TrainRDBMS.stops WHERE sc = " + scheduleid + " AND transitName = '" + transitName + "';";
 
@@ -230,7 +260,7 @@
 					if(rs.next())
 					{
 						seatNumber = rs.getInt(1);
-						out.print("Seat number = " + seatNumber + "<br>");
+						//out.print("Seat number = " + seatNumber + "<br>");
 					}
     				if(request.getParameterValues("customerRep")!=null)
     				{
@@ -244,8 +274,8 @@
 					
 					out.print("Reservation id : " + rid + "<br/>");
 					out.print("Transit Name : " + transitName + "<br/>");
-					out.print("Origin : " + desiredOrigin + "<br/>");
-					out.print("Destination : " + desiredDestination + "<br/>");
+					out.print("Origin : " + originName + "<br/>");
+					out.print("Destination : " + destinationName + "<br/>");
 					out.print("Total fee : $" + travelFee + "<br/>");
 					out.print("Booking fee : $" + bookingFee + "<br>");
 					out.print(seatClass + " cost : $" + classCost + "<br>");
