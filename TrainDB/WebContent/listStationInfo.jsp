@@ -20,7 +20,7 @@ PreparedStatement statement = null;
 ResultSet resultSet = null;
 %>
 
-<h2>List of Schedules which have the given Origin and Destination in their paths.</h2>
+<h2>List of Schedules for a given Station!</h2>
 <br>
 
 <table>
@@ -40,19 +40,18 @@ ResultSet resultSet = null;
 		ApplicationDB db = new ApplicationDB();
 		con = db.getConnection();
 	//recieve relevant info
-		String originStation = request.getParameter("startSid").toString();
-		String destStation = request.getParameter("stopSid").toString();
+		String stationid = request.getParameter("stationid").toString();
 	
-		PreparedStatement st1 = con.prepareStatement("SELECT *, COUNT(*) as Cnt FROM stops WHERE startSid=? OR stopSid =? HAVING Cnt >=2;");
-		st1.setInt(1, Integer.parseInt(originStation));
-		st1.setInt(2, Integer.parseInt(destStation));
-		ResultSet rs = st1.executeQuery();
-		while(rs.next())
+		PreparedStatement st1 = con.prepareStatement("SELECT DISTINCT transitName, scheduleid FROM stops WHERE startSid=? OR stopSid =? ;");
+		st1.setInt(1, Integer.parseInt(stationid));
+		st1.setInt(2, Integer.parseInt(stationid));
+		ResultSet tr = st1.executeQuery();
+		while(tr.next())
 		{
-			
+
 			PreparedStatement st2 = con.prepareStatement("SELECT * from schedule WHERE transitName=? AND scheduleid=?");
-			st2.setString(1,rs.getString("transitName"));
-			st2.setInt(2, Integer.parseInt(rs.getString("scheduleid")));
+			st2.setString(1,tr.getString("transitName"));
+			st2.setInt(2, Integer.parseInt(tr.getString("scheduleid")));
 			resultSet = st2.executeQuery();
 			
 			while(resultSet.next()){
@@ -68,7 +67,7 @@ ResultSet resultSet = null;
 				<td><%=resultSet.getString("departureTime") %></td>
 				<td><%=resultSet.getString("arrivalTime") %></td>
 				</tr>
-			<% 
+			<%
 			}
 		}
 		con.close();

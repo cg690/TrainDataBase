@@ -201,7 +201,7 @@ ResultSet resultSet = null;
 	<br>
 	<br>
 	
-	<label> Respond to questions (Part VI)</label>
+	<h2> Respond to questions (Part VI)</h2>
 	
 	<form method="get" action = "replyCustomers.jsp">
 		<input type="submit" value="View Customers Questions">
@@ -211,7 +211,7 @@ ResultSet resultSet = null;
 	
 	
 	
-	<label> List of Train Schedules for Specific Origin and Destination (Part VI)</label>
+	<h2> List of Train Schedules for Specific Origin and Destination (Part VI)</h2>
 	
 	<form method="get" action = "listOriginDest.jsp">
 		<label>Starting Station ID:</label>
@@ -224,6 +224,32 @@ ResultSet resultSet = null;
 	<br>
 	<br>
 	
+	<h2> List of Train Schedules going through a certain station (Part VI)</h2>
+	
+	<form method="get" action = "listStationInfo.jsp">
+		<label>Station ID:</label>
+	<input type="number" name="stationid">
+	<p>Please enter the Station ID you want to see schedules for. They're visible in the table above!</p>
+		<input type="submit" value="List Schedules for this Path!">
+	</form>
+	<br>
+	<br>
+	
+	<h2>List of Customers with reserved seats on a given transit line and train (Part VI)</h2>
+	
+	<p>Please enter the following information to get customer info!</p>
+	<form method="get" action = "listCustomers.jsp">
+		<label>Transit Line Name:</label>
+	<input type="text" name="transitName">
+	<label>Schedule ID:</label>
+	<input type="number" name="scheduleid">
+	<label>Train Number:</label>
+	<input type="number" name="tid">
+	<p>Schedule ID and Train Number must be integer numbers.</p>
+		<input type="submit" value="View Customers">
+	</form>
+	<br>
+	<br>
 	
 	<a href="logout.jsp">Logout</a>
 <br>
